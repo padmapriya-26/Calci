@@ -39,15 +39,13 @@ pipeline {
                 label 'java-slave'
             } 
             steps {
-                dir('Calci') {
                 // Unstash artifacts on the slave node
                 unstash 'java-artifact'
                 unstash 'dockerfile'
                 sh '''
                   export DOCKER_BUILDKIT=0
                   docker build -t padmapriya26/calculator:v1 .
-                '''
-                }     
+                '''     
             }
         }
         
