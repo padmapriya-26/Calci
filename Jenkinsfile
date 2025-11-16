@@ -39,10 +39,13 @@ pipeline {
                 label 'java-slave'
             } 
             steps {
+                sh 'mkdir -p build'
+                dir('build') {
                 // Unstash artifacts on the slave node
                 unstash 'java-artifact'
                 unstash 'dockerfile'
                 sh 'docker build -t padmapriya26/calculator:v1 .'
+                }     
             }
         }
         
