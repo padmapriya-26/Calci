@@ -38,10 +38,12 @@
                 label 'java-slave'
             } 
             steps {
-                // Unstash artifacts on the slave node
+                dir('Calci/calculator') {
+                  // Unstash artifacts on the slave node
                 unstash 'java-artifact'
                 unstash 'Dockerfile'
-                sh 'docker build -t padmapriya-26/calculator:v1 .'
+                sh 'docker build -t padmapriya-26/calculator:v1 .'  
+                }
             }
         }
         
