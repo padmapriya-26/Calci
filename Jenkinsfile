@@ -8,7 +8,8 @@
             steps {
                 echo "*********** cloning the code **********"
                 sh 'rm -rf Calci || true'
-                sh 'git clone https://github.com/padmapriya-26/Calci.git'     
+                sh 'git clone https://github.com/padmapriya-26/Calci.git' 
+                
             }
         }
         
@@ -41,6 +42,7 @@
                 unstash 'java-artifact'
                 unstash 'Dockerfile'
                 sh 'docker build -t padmapriya-26/calculator:v1 .'
+                docker images
             }
         }
         
