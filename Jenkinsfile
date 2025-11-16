@@ -7,10 +7,10 @@ pipeline {
         stage('checkout') {
             steps {
                 echo "*********** cloning the code **********"
-                sh """
+                sh '''
                     rm -rf Calci || true
                     git clone https://github.com/padmapriya-26/Calci.git
-                """ 
+                ''' 
             }
         }
         
@@ -29,7 +29,7 @@ pipeline {
                     stash name: 'java-artifact', includes: 'calculator-0.0.1-SNAPSHOT.jar'
                 }
                 dir('Calci') {
-                    stash name: 'Dockerfile', includes: 'Dockerfile'
+                    stash name: 'dockerfile', includes: 'Dockerfile'
                 }
             }
         }
@@ -41,7 +41,7 @@ pipeline {
             steps {
                 // Unstash artifacts on the slave node
                 unstash 'java-artifact'
-                unstash 'Dockerfile'
+                unstash 'dockerfile'
                 sh 'docker build -t padmapriya26/calculator:v1 .'
             }
         }
@@ -52,7 +52,7 @@ pipeline {
             } 
             steps {
                 sh """
-                docker login -u ${DOCKERHUB_CREDENTIALS_USR} -p ${DOCKERHUB_CREDENTIALS_PSW}
+                echo "${DOCKERHUB_CREDENTIALS_PSW}" | docker login -u "${DOCKERHUB_CREDENTIALS_USR}" --password-stdin
                 docker push padmapriya26/calculator:v1
                 """
             }
