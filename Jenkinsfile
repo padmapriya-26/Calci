@@ -8,7 +8,7 @@ pipeline {
             steps {
                 echo "*********** cloning the code **********"
                 sh ""
-                  rm -rf Calci || true
+                  rm -rf calculator || true
                   git clone https://github.com/padmapriya-26/Calci.git
                 ""  
             }
