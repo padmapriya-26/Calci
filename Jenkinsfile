@@ -39,13 +39,14 @@ pipeline {
         stage('Build Docker Image') {
             agent { label 'java-slave' }
             steps {
+                sh 'rm -rf Calci && mkdir Calci'
                 dir('Calci') {
                     unstash 'java-artifact'
                     unstash 'dockerfile'
 
                     sh '''
                         export DOCKER_BUILDKIT=0
-                        docker build -t padmapriya26/calculator:v1 .
+                        docker build -t padmapriya26/calculator .
                     '''
                 }
             }
