@@ -28,7 +28,7 @@ pipeline {
                 dir('Calci/calculator/target') {
                     stash name: 'java-artifact', includes: 'calculator-0.0.1-SNAPSHOT.jar'
                 }
-                dir('Calci') {
+                dir('Calci/calculator') {
                     stash name: 'dockerfile', includes: 'Dockerfile'
                 }
             }
