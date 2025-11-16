@@ -7,10 +7,10 @@ pipeline {
         stage('checkout') {
             steps {
                 echo "*********** cloning the code **********"
-                sh ""
-                  rm -rf calculator || true
-                  git clone https://github.com/padmapriya-26/Calci.git
-                ""  
+                sh """
+                    rm -rf Calci || true
+                    git clone https://github.com/padmapriya-26/Calci.git
+                """ 
             }
         }
         
