@@ -42,7 +42,6 @@
                 unstash 'java-artifact'
                 unstash 'Dockerfile'
                 sh 'docker build -t padmapriya-26/calculator:v1 .'
-                docker images
             }
         }
         
