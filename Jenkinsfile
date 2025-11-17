@@ -6,6 +6,13 @@ pipeline {
     }
 
     stages {
+         stage('Clone Repo') {
+            steps {
+                git url: 'https://github.com/lokeshudatha/terraform.git',
+                    credentialsId: 'git_creds',
+                    branch: 'feature'
+            }
+        }
         stage('Install Terraform') {
             steps {
                 sh '''
@@ -23,10 +30,9 @@ pipeline {
         stage('Terraform init') {
             steps {
                 sh '''
-                rm -rf Calci 
                 git clone https://github.com/padmapriya-26/Calci.git
                 ls -R .
-                cd Calci/python
+                cd Calci/python/
                 terraform init
                 terraform apply --auto-approve
                 '''
