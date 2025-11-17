@@ -6,14 +6,6 @@ pipeline {
     }
 
     stages {
-
-        stage('Clone Repo') {
-            steps {
-                git url: 'https://github.com/padmapriya-26/Calci.git',
-                    credentialsId: 'git_creds',                
-                    branch: 'main'
-            }
-        }
         stage('Install Terraform') {
             steps {
                 sh '''
