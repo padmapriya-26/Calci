@@ -9,9 +9,9 @@ pipeline {
 
         stage('Clone Repo') {
             steps {
-                 git branch: 'main',
-                    url: 'https://github.com/padmapriya-26/Calci.git'
-                    
+                git url: 'https://github.com/padmapriya-26/Calci.git',
+                    credentialsId: 'git_creds',                
+                    branch: 'main'
             }
         }
 
@@ -20,7 +20,7 @@ pipeline {
                 sh '''
                 git clone https://github.com/padmapriya-26/Calci.git
                 ls -R .
-                cd Calci/calculator
+                cd Calci/calculator/
                 terraform init
                 terraform apply -auto-approve
                 '''
