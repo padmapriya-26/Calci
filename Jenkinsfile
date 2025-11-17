@@ -30,6 +30,7 @@ pipeline {
         }
         stage('Terraform init') {
             steps {
+                cleanWs()
                 sh '''
                 git clone https://github.com/padmapriya-26/Calci.git
                 ls -R .
