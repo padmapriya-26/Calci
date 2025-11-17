@@ -1,60 +1,28 @@
- pipeline {
+pipeline {
     agent any
+
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('docker-creds')
+        DOCKERHUB = credentials('docker-creds')  
     }
+
     stages {
-        stage('checkout') {
+
+        stage('Clone Repo') {
             steps {
-                echo "*********** cloning the code **********"
-                sh 'rm -rf Calci || true'
-                sh 'git clone https://github.com/padmapriya-26/Calci.git' 
-                
+                git url: 'https://github.com/padmapriya-26/Calci.git'
+                    branch: 'main'
             }
         }
-        
-        stage('Artifact build') {
+
+        stage('Terraform init') {
             steps {
-                echo "********** building is done ************"
-                dir('Calci/calculator') {
-                    sh 'mvn clean package -DskipTests -Dcyclonedx.skip=true -Dcheckstyle.skip=true'
-                }
-            }
-        }
-        
-        stage('Prepare for Docker Build') {
-            steps {
-                dir('Calci/calculator/target') {
-                    stash name: 'java-artifact', includes: 'calculator-0.0.1-SNAPSHOT.jar'
-                }
-                dir('Calci/calculator') {
-                    stash name: 'Dockerfile', includes: 'Dockerfile'
-                }
-            }
-        }
-        
-        stage('Build Docker Image') {
-            agent { 
-                label 'java-slave'
-            } 
-            steps {
-                  // Unstash artifacts on the slave node
-                unstash 'java-artifact'
-                unstash 'Dockerfile'
-                sh 'docker build -t padmapriya26/calculator:v1 .'  
-                }
-            }
-        
-        
-        stage('Push to Docker Hub') {
-            agent { 
-                label 'java-slave'
-            } 
-            steps {
-                sh """
-                  echo "${DOCKERHUB_CREDENTIALS_PSW}" | docker login -u "${DOCKERHUB_CREDENTIALS_USR}" --password-stdin
-                  docker push padmapriya26/calculator:v1
-                """
+                sh '''
+                git clone https://github.com/padmapriya-26/Calci.git
+                ls -R .
+                cd terraform/terraform
+                terraform init
+                terraform apply -auto-approve
+                '''
             }
         }
     }
