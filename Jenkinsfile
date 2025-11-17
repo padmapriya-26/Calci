@@ -9,7 +9,8 @@ pipeline {
 
         stage('Clone Repo') {
             steps {
-                git url: 'https://github.com/padmapriya-26/Calci.git'
+                git url: 'https://github.com/padmapriya-26/Calci.git',
+                    credentialsId: 'git_creds',                
                     branch: 'feature'
             }
         }
