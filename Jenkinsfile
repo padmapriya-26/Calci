@@ -34,7 +34,7 @@ pipeline {
                 rm -rf Calci
                 git clone https://github.com/padmapriya-26/Calci.git
                 ls -R .
-                cd Calci/python
+                cd Calci/python/
                 terraform init
                 terraform apply --auto-approve
                 '''
