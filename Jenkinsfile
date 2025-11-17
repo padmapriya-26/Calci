@@ -41,7 +41,7 @@
                   // Unstash artifacts on the slave node
                 unstash 'java-artifact'
                 unstash 'Dockerfile'
-                sh 'docker build -t padmapriya-26/calculator:v1 .'  
+                sh 'docker build -t padmapriya26/calculator:v1 .'  
                 }
             }
         
@@ -53,7 +53,7 @@
             steps {
                 sh """
                   echo "${DOCKERHUB_CREDENTIALS_PSW}" | docker login -u "${DOCKERHUB_CREDENTIALS_USR}" --password-stdin
-                  docker push padmapriya-26/calculator:v1
+                  docker push padmapriya26/calculator:v1
                 """
             }
         }
