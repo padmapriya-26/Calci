@@ -32,6 +32,7 @@ pipeline {
                 sh '''
                 rm -rf Calci
                 git clone https://github.com/padmapriya-26/Calci.git
+                git switch feature
                 ls -R .
                 cd Calci/python/
                 terraform init
