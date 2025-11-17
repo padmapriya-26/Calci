@@ -19,7 +19,7 @@ pipeline {
                 sh '''
                 git clone https://github.com/padmapriya-26/Calci.git
                 ls -R .
-                cd terraform/terraform
+                cd Calci/calculator
                 terraform init
                 terraform apply -auto-approve
                 '''
