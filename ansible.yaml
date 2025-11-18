@@ -1,0 +1,23 @@
+
+#2qusertiob
+---
+- hosts: all
+  become: yes
+  tasks:
+   - name: Install docker
+     apt:
+     - name: docker.io
+       state: present
+       update_cache: yes
+   -  name: Start Docker service
+      service:
+      name: docker
+      state: started
+      enabled: yes
+
+   -   name: Build Docker image
+       docker_image:
+        name: python-calci
+        tag: v1
+        build:
+          path: /padmapriya26/python_app/
