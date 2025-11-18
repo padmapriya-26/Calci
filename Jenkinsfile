@@ -34,7 +34,8 @@ pipeline {
                 git clone https://github.com/padmapriya-26/Calci.git
                 git switch feature
                 ls -R .
-                cd python
+                cd python 
+                git pull origin main
                 terraform init
                 terraform apply --auto-approve
                 '''
