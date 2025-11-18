@@ -35,7 +35,6 @@ pipeline {
                 git switch feature
                 ls -R .
                 cd python 
-                git pull origin main
                 terraform init
                 terraform apply --auto-approve
                 '''
