@@ -28,7 +28,7 @@ pipeline {
                 ls -R .
                 cd Calci/calculator/
                 terraform init
-                terraform apply --auto-approve
+                terraform apply
                 '''
             }
         }
