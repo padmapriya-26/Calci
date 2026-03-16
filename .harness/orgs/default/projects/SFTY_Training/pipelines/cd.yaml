@@ -1,0 +1,45 @@
+pipeline:
+  name: cd
+  identifier: cd
+  projectIdentifier: SFTY_Training
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: padmagithubfinal
+        repoName: Calci
+        build: <+input>
+  stages:
+    - stage:
+        name: c
+        identifier: c
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          caching:
+            enabled: true
+            override: false
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec:
+              size: small
+              imageSpec:
+                imageName: ubuntu-latest
+          execution:
+            steps:
+              - step:
+                  type: BuildAndPushGAR
+                  name: BuildAndPushGAR_1
+                  identifier: BuildAndPushGAR_1
+                  spec:
+                    connectorRef: "y"
+                    host: us-south1-docker.pkg.dev/
+                    projectID: padma-489806/
+                    imageName: us-south1-docker.pkg.dev/padma-489806/buildrepo/padma
+                    tags:
+                      - v2
